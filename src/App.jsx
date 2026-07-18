@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import FloatingDock from './FloatingDock'
+import { FaGithub, FaLinkedin, FaFileDownload, FaArrowUp } from 'react-icons/fa'
 import {
   LuHouse,
   LuBriefcase,
@@ -19,33 +20,35 @@ const EMAIL = 'sertacakalin0@gmail.com'
 const CV_TR = '/cv/SertacAkalin_CV_TR.pdf'
 const CV_EN = '/cv/SertacAkalin_CV_EN.pdf'
 
+const roles = ['Backend Developer', 'Java / Spring Boot', 'Python / FastAPI', 'Bilgisayar Mühendisi']
+
 const dockItems = [
-  { label: 'Ana sayfa', href: '#hero', icon: LuHouse },
+  { label: 'Ana Sayfa', href: '#hero', icon: LuHouse },
   { label: 'Deneyim', href: '#deneyim', icon: LuBriefcase },
   { label: 'Projeler', href: '#projeler', icon: LuFolderGit2 },
   { label: 'Eğitim', href: '#egitim', icon: LuGraduationCap },
   { label: 'CV', href: CV_TR, icon: LuFileText, external: true },
   { label: 'GitHub', href: GITHUB_URL, icon: LuGithub, external: true },
   { label: 'LinkedIn', href: LINKEDIN_URL, icon: LuLinkedin, external: true },
-  { label: 'E-posta', href: `mailto:${EMAIL}`, icon: LuMail, external: true },
+  { label: 'İletişim', href: '#iletisim', icon: LuMail },
 ]
 
 const experience = [
   {
     company: 'FEV Türkiye',
     role: 'Yazılım Mühendisi Stajyeri',
-    date: 'Oca 2026 — Haz 2026',
+    date: 'OCAK 2026 — HAZİRAN 2026',
     points: [
       'Jaguar Land Rover / Tata için geliştirilen SOVD (Service-Oriented Vehicle Diagnostics) projesinde Python ve FastAPI ile backend tarafında çalıştım.',
       'REST tabanlı diagnostik servislerin uç noktalarının geliştirilmesinde yer aldım.',
-      "Almanya ve Hindistan'dan mühendislerin olduğu bir ekipte, daily'ler ve kurumsal süreçlerin içinde çalıştım.",
+      "Almanya ve Hindistan'dan mühendislerin olduğu uluslararası bir ekipte, daily'ler ve kurumsal süreçlerin içinde çalıştım.",
     ],
     stack: ['Python', 'FastAPI', 'REST', 'Git'],
   },
   {
     company: 'CodeFirst',
     role: 'Java Backend Developer Stajyeri',
-    date: 'Oca 2025 — Nis 2025',
+    date: 'OCAK 2025 — NİSAN 2025',
     points: [
       'Spring Boot tabanlı, mikroservis ve katmanlı mimaride (Controller–Service–Repository) RESTful API ve harici servis entegrasyonları geliştirdim.',
       'Spring Data JPA / Hibernate ile veritabanı işlemleri; DTO yapıları, transaction yönetimi ve JWT tabanlı kimlik doğrulama üzerinde çalıştım.',
@@ -58,15 +61,15 @@ const experience = [
 const featuredProjects = [
   {
     name: 'Palmystra',
-    desc: 'El fotoğrafından kişiselleştirilmiş yorumlar üreten full-stack iOS uygulaması. Görüntü işlemeyle el çizgilerini tespit eden ve LangChain tabanlı bilgi tabanından yorum üreten bir AI pipeline kurdum. Backend tarafında API güvenliği, rate limiting ve test paketi var; Docker ile Google Cloud Run üzerinde yayında.',
-    stack: ['FastAPI', 'LangChain', 'OpenCV', 'SwiftUI', 'Cloud Run'],
+    desc: 'El fotoğrafından kişiselleştirilmiş yorumlar üreten full-stack iOS uygulaması. Görüntü işlemeyle el çizgisi tespiti, LangChain tabanlı bilgi tabanından yorum üretimi. Backend tarafında API güvenliği, rate limiting ve test paketi; Docker ile Google Cloud Run üzerinde yayında.',
+    tags: ['FastAPI', 'LangChain', 'OpenCV', 'SwiftUI', 'Cloud Run'],
     link: null,
-    note: 'kapalı kaynak',
+    note: 'Kapalı kaynak',
   },
   {
-    name: 'hatched-area-violation-detection',
-    desc: 'Trafik videolarında araçların taralı yol alanlarına girişini tespit eden bilgisayarlı görü sistemi. Kendi topladığım İstanbul trafiği veri setiyle YOLOv8 fine-tune ettim (%85+ tespit), ByteTrack ile çoklu araç takibi yaptım. İhlal anında Türk plakalarını okuyan plaka tespiti + OCR + format doğrulama akışı da ekledim.',
-    stack: ['YOLOv8', 'ByteTrack', 'OpenCV', 'EasyOCR', 'Shapely'],
+    name: 'Hatched Area Violation Detection',
+    desc: 'Trafik videolarında araçların taralı yol alanlarına girişini tespit eden bilgisayarlı görü sistemi. Kendi topladığım İstanbul trafiği veri setiyle fine-tune edilmiş YOLOv8 (%85+ tespit), ByteTrack ile çoklu araç takibi, ihlal anında plaka tespiti + OCR.',
+    tags: ['YOLOv8', 'ByteTrack', 'OpenCV', 'EasyOCR'],
     link: 'https://github.com/sertacakalin/hatched-area-violation-detection',
     note: null,
   },
@@ -93,14 +96,46 @@ const education = [
 ]
 
 const skills = [
-  { label: 'backend', items: 'Java, Spring Boot, Spring Data JPA, Python, FastAPI' },
-  { label: 'veritabanı', items: 'PostgreSQL, MySQL' },
-  { label: 'ai', items: 'LangChain, RAG, OpenCV, YOLOv8' },
-  { label: 'araçlar', items: 'Git, Docker, Postman, Firebase' },
+  { label: 'Backend', items: ['Java', 'Spring Boot', 'Spring Data JPA', 'Python', 'FastAPI'] },
+  { label: 'Veritabanı', items: ['PostgreSQL', 'MySQL'] },
+  { label: 'AI', items: ['LangChain', 'RAG', 'OpenCV', 'YOLOv8'] },
+  { label: 'Araçlar', items: ['Git', 'Docker', 'Postman', 'Firebase'] },
 ]
 
 function App() {
+  const [typedText, setTypedText] = useState(roles[0])
   const [activeSection, setActiveSection] = useState('hero')
+
+  useEffect(() => {
+    let roleIndex = 0
+    let charIndex = roles[0].length
+    let isDeleting = false
+    let timerId
+
+    const typeEffect = () => {
+      const currentRole = roles[roleIndex]
+      const nextCharIndex = isDeleting ? charIndex - 1 : charIndex + 1
+
+      setTypedText(currentRole.substring(0, nextCharIndex))
+      charIndex = nextCharIndex
+
+      let typeSpeed = isDeleting ? 45 : 90
+
+      if (!isDeleting && charIndex === currentRole.length) {
+        typeSpeed = 2400
+        isDeleting = true
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false
+        roleIndex = (roleIndex + 1) % roles.length
+        typeSpeed = 400
+      }
+
+      timerId = setTimeout(typeEffect, typeSpeed)
+    }
+
+    timerId = setTimeout(typeEffect, 2400)
+    return () => clearTimeout(timerId)
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -145,162 +180,195 @@ function App() {
       <main className="wrap">
         <section id="hero" className="hero reveal">
           <p className="hero__hi mono">merhaba, ben</p>
-          <h1 className="hero__name">Sertaç Akalın</h1>
-          <p className="hero__role">
-            Backend Developer — <span>Java / Spring Boot</span> · <span>Python / FastAPI</span>
+          <h1 className="hero__name">SERTAÇ AKALIN</h1>
+          <p className="hero__type">
+            <span>{typedText}</span>
+            <span className="cursor">_</span>
           </p>
-          <p className="hero__text">
-            Bilgisayar Mühendisliği (İngilizce) mezunuyum. REST API'ler, veritabanı işlemleri ve
-            servis entegrasyonları üzerine çalışıyorum; yanında da bilgisayarlı görü ve LLM tabanlı
-            projeler geliştiriyorum. Öğrendiğimi gerçek projede kullanmayı, karşılığında da projeden
-            yeni şeyler öğrenmeyi severim.
+          <p className="bio">
+            Bilgisayar Mühendisliği (İngilizce) mezunuyum. Java/Spring Boot ve Python/FastAPI ile
+            backend geliştiriyorum; REST API'ler, veritabanı işlemleri ve servis entegrasyonları
+            üzerine çalışıyorum. Yanında da bilgisayarlı görü ve LLM tabanlı projeler geliştiriyorum.
           </p>
 
-          <div className="hero__links mono">
-            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
-              <LuGithub /> github
+          <div className="socials">
+            <a href={GITHUB_URL} className="social-link" target="_blank" rel="noopener noreferrer">
+              <FaGithub className="social-icon" />
+              <span>GitHub</span>
             </a>
-            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
-              <LuLinkedin /> linkedin
+            <a href={LINKEDIN_URL} className="social-link" target="_blank" rel="noopener noreferrer">
+              <FaLinkedin className="social-icon" />
+              <span>LinkedIn</span>
             </a>
-            <a href={`mailto:${EMAIL}`}>
-              <LuMail /> e-posta
+            <a
+              href={CV_TR}
+              className="social-link cv-download"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaFileDownload className="social-icon" />
+              <span>CV — TR</span>
             </a>
-            <a href={CV_TR} target="_blank" rel="noopener noreferrer" className="hero__cv">
-              <LuFileText /> cv — tr
-            </a>
-            <a href={CV_EN} target="_blank" rel="noopener noreferrer" className="hero__cv">
-              <LuFileText /> cv — en
+            <a
+              href={CV_EN}
+              className="social-link cv-download"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaFileDownload className="social-icon" />
+              <span>CV — EN</span>
             </a>
           </div>
         </section>
 
         <section id="deneyim" className="section reveal">
-          <h2 className="section-label mono">deneyim</h2>
-          <div className="entries">
+          <h2 className="section-title">Deneyim</h2>
+          <div className="timeline">
             {experience.map((job) => (
-              <article className="entry" key={job.company}>
-                <div className="entry__head">
-                  <h3>
-                    {job.role} <span className="entry__at">· {job.company}</span>
-                  </h3>
-                  <span className="entry__date mono">{job.date}</span>
-                </div>
-                <ul className="entry__points">
+              <div className="timeline__item" key={job.company}>
+                <span className="timeline__date mono">{job.date}</span>
+                <h3 className="timeline__title">
+                  {job.role} <span className="timeline__company-accent">· {job.company}</span>
+                </h3>
+                <ul className="timeline__points">
                   {job.points.map((point) => (
                     <li key={point}>{point}</li>
                   ))}
                 </ul>
-                <p className="entry__stack mono">{job.stack.join(' · ')}</p>
-              </article>
+                <div className="tags">
+                  {job.stack.map((tag) => (
+                    <span className="pill" key={tag}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </section>
 
         <section id="projeler" className="section reveal">
-          <h2 className="section-label mono">projeler</h2>
-          <div className="entries">
+          <h2 className="section-title">Projeler</h2>
+          <div className="projects__grid">
             {featuredProjects.map((project) => (
-              <article className="project" key={project.name}>
-                <div className="entry__head">
-                  <h3>
-                    {project.link ? (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project__link"
-                      >
-                        {project.name} <LuArrowUpRight className="project__arrow" />
-                      </a>
-                    ) : (
-                      project.name
-                    )}
-                  </h3>
-                  {project.note && <span className="entry__date mono">{project.note}</span>}
+              <article className="card" key={project.name}>
+                <div className="card__top">
+                  <h3 className="card__heading">{project.name}</h3>
+                  {project.note && <span className="card__note mono">{project.note}</span>}
                 </div>
-                <p className="project__desc">{project.desc}</p>
-                <p className="entry__stack mono">{project.stack.join(' · ')}</p>
+                <p className="card__text">{project.desc}</p>
+                <div className="tags">
+                  {project.tags.map((tag) => (
+                    <span className="pill" key={tag}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                {project.link && (
+                  <div className="card__links">
+                    <a
+                      href={project.link}
+                      className="card-btn"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaGithub /> GitHub'da incele
+                    </a>
+                  </div>
+                )}
               </article>
             ))}
           </div>
 
           <div className="repos">
             <p className="repos__label mono">diğer repolar</p>
-            <ul className="repos__list">
+            <div className="repos__list">
               {otherRepos.map((repo) => (
-                <li key={repo.name}>
-                  <a href={repo.link} target="_blank" rel="noopener noreferrer" className="mono">
-                    {repo.name}
-                    <span className="repos__lang">{repo.lang}</span>
-                  </a>
-                </li>
-              ))}
-              <li>
                 <a
-                  href={`${GITHUB_URL}?tab=repositories`}
+                  key={repo.name}
+                  href={repo.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mono repos__all"
+                  className="repo-chip mono"
                 >
-                  tümü <LuArrowUpRight />
+                  {repo.name}
+                  <span className="repo-chip__lang">{repo.lang}</span>
                 </a>
-              </li>
-            </ul>
+              ))}
+              <a
+                href={`${GITHUB_URL}?tab=repositories`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="repo-chip mono"
+              >
+                tümü <LuArrowUpRight />
+              </a>
+            </div>
           </div>
         </section>
 
         <section id="egitim" className="section reveal">
-          <h2 className="section-label mono">eğitim</h2>
-          <div className="edu">
+          <h2 className="section-title">Eğitim</h2>
+          <div className="edu__list">
             {education.map((item) => (
-              <div className="edu__row" key={item.degree}>
+              <div className="education__item" key={item.degree}>
                 <div>
-                  <p className="edu__school">{item.school}</p>
-                  <p className="edu__degree">{item.degree}</p>
+                  <h3 className="education__degree">{item.school}</h3>
+                  <p className="education__school">{item.degree}</p>
                 </div>
-                <span className="entry__date mono">{item.date}</span>
+                <span className="education__date mono">{item.date}</span>
               </div>
             ))}
           </div>
 
           <div className="skills">
             {skills.map((row) => (
-              <p className="skills__row mono" key={row.label}>
-                <span className="skills__label">{row.label}:</span> {row.items}
-              </p>
+              <div className="skills__row" key={row.label}>
+                <span className="skills__label mono">{row.label}</span>
+                <div className="tags">
+                  {row.items.map((item) => (
+                    <span className="pill" key={item}>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </section>
 
-        <section id="iletisim" className="section section--contact reveal">
-          <h2 className="section-label mono">iletişim</h2>
+        <section id="iletisim" className="section contact reveal">
+          <h2 className="section-title">İletişim</h2>
           <p className="contact__text">
             Bir pozisyon, bir proje ya da sadece selam vermek için — mail atman yeterli.
           </p>
           <a href={`mailto:${EMAIL}`} className="contact__mail mono">
             {EMAIL}
           </a>
-          <div className="contact__cv mono">
-            <a href={CV_TR} target="_blank" rel="noopener noreferrer">
-              <LuFileText /> CV (Türkçe)
+          <div className="contact__actions">
+            <a href={CV_TR} className="social-link" target="_blank" rel="noopener noreferrer">
+              <FaFileDownload className="social-icon" />
+              <span>CV (Türkçe)</span>
             </a>
-            <a href={CV_EN} target="_blank" rel="noopener noreferrer">
-              <LuFileText /> CV (English)
+            <a href={CV_EN} className="social-link" target="_blank" rel="noopener noreferrer">
+              <FaFileDownload className="social-icon" />
+              <span>CV (English)</span>
             </a>
           </div>
         </section>
       </main>
 
-      <footer className="footer mono">
-        <p>© 2026 Sertaç Akalın</p>
-        <a
-          href="https://github.com/sertacakalin/sertacakalin.github.io"
-          target="_blank"
-          rel="noopener noreferrer"
+      <footer className="footer">
+        <p>
+          © 2026 <span>SERTAÇ AKALIN</span>
+        </p>
+        <button
+          className="back-to-top"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          kaynak kodu
-        </a>
+          <FaArrowUp className="back-to-top-icon" />
+          <span>Başa Dön</span>
+        </button>
       </footer>
     </>
   )
