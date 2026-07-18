@@ -72,6 +72,7 @@ const services = [
   },
   {
     icon: LuBrain,
+    tone: 'purple',
     title: 'AI & Bilgisayarlı Görü',
     desc: 'LLM entegrasyonları ve görüntü işleme pipeline’ları — demolar değil, çalışan sistemler.',
     checks: [
@@ -84,6 +85,7 @@ const services = [
   },
   {
     icon: LuWorkflow,
+    tone: 'green',
     title: 'Deployment & Araçlar',
     desc: 'Geliştirmeden yayına kadar sürecin tamamında kullandığım araç seti.',
     checks: [
@@ -110,6 +112,7 @@ const experience = [
   },
   {
     company: 'CodeFirst',
+    tone: 'orange',
     role: 'Java Backend Developer Stajyeri',
     date: 'Ocak — Nisan 2025',
     points: [
@@ -173,6 +176,7 @@ const stackCategories = [
   },
   {
     title: 'AI & Görüntü İşleme',
+    tone: 'purple',
     desc: 'LLM entegrasyonları ve bilgisayarlı görü projelerinde kullandıklarım.',
     tiles: [
       { icon: SiLangchain, name: 'LangChain' },
@@ -359,8 +363,8 @@ function App() {
               <h3 className="about__col-title mono">EĞİTİM</h3>
               <div className="mini__list">
                 {education.map((item) => (
-                  <div className="mini" key={item.degree}>
-                    <span className="mini__icon">
+                  <div className="mini card--purple" key={item.degree}>
+                    <span className="mini__icon tone--purple">
                       <LuGraduationCap />
                     </span>
                     <div>
@@ -376,8 +380,8 @@ function App() {
               <h3 className="about__col-title mono">DİĞER</h3>
               <div className="mini__list">
                 {quickFacts.map((fact) => (
-                  <div className="mini" key={fact.label}>
-                    <span className="mini__icon">
+                  <div className="mini card--green" key={fact.label}>
+                    <span className="mini__icon tone--green">
                       <LuCircleCheck />
                     </span>
                     <div>
@@ -411,8 +415,11 @@ function App() {
             {services.map((service) => {
               const Icon = service.icon
               return (
-                <article className="scard" key={service.title}>
-                  <span className="scard__icon">
+                <article
+                  className={`scard${service.tone ? ` card--${service.tone}` : ''}`}
+                  key={service.title}
+                >
+                  <span className={`scard__icon${service.tone ? ` tone--${service.tone}` : ''}`}>
                     <Icon />
                   </span>
                   <h3 className="scard__title">{service.title}</h3>
@@ -447,9 +454,12 @@ function App() {
           />
           <div className="xp__list">
             {experience.map((job) => (
-              <article className="xp" key={job.company}>
+              <article
+                className={`xp${job.tone ? ` card--${job.tone}` : ''}`}
+                key={job.company}
+              >
                 <div className="xp__head">
-                  <span className="xp__icon">
+                  <span className={`xp__icon${job.tone ? ` tone--${job.tone}` : ''}`}>
                     <LuBriefcase />
                   </span>
                   <div className="xp__meta">
@@ -529,8 +539,8 @@ function App() {
           <p className="oss__label mono">DİĞER REPOLAR</p>
           <div className="grid2">
             {otherRepos.map((repo) => (
-              <article className="oss" key={repo.name}>
-                <span className="oss__icon">
+              <article className="oss card--pink" key={repo.name}>
+                <span className="oss__icon tone--pink">
                   <LuCode />
                 </span>
                 <div className="oss__body">
@@ -589,7 +599,7 @@ function App() {
                   {cat.tiles.map((tile) => {
                     const Icon = tile.icon
                     return (
-                      <div className="tile" key={tile.name}>
+                      <div className={`tile${cat.tone ? ` tile--${cat.tone}` : ''}`} key={tile.name}>
                         <Icon className="tile__icon" />
                         <span className="tile__name">{tile.name}</span>
                       </div>

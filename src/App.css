@@ -9,6 +9,10 @@
   --faint: rgb(98, 108, 116);
   --accent: rgb(34, 211, 238);
   --accent-dim: rgba(34, 211, 238, 0.6);
+  --purple: rgb(167, 139, 250);
+  --green: rgb(74, 222, 128);
+  --orange: rgb(251, 146, 60);
+  --pink: rgb(244, 114, 182);
   --border: rgba(255, 255, 255, 0.08);
   --border-hover: rgba(34, 211, 238, 0.35);
   --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
@@ -165,7 +169,7 @@ body {
 
 .hero {
   padding: 10px 0;
-  margin-top: 70px;
+  margin-top: 36px;
   max-width: 780px;
 }
 
@@ -239,7 +243,7 @@ body {
   font-size: 10.5px;
   letter-spacing: 2.5px;
   color: var(--faint);
-  margin: 46px 0 10px;
+  margin: 34px 0 0;
 }
 
 .scroll-hint svg {
@@ -254,7 +258,7 @@ body {
 /* ============ section headers ============ */
 
 .section {
-  margin-top: 120px;
+  margin-top: 88px;
 }
 
 .shead {
@@ -765,11 +769,7 @@ body {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   padding: 18px 4px;
-  margin-top: 40px;
-}
-
-.about__cols {
-  margin-top: 40px;
+  margin-top: 34px;
 }
 
 .about__cta-text {
@@ -1055,6 +1055,52 @@ a.cinfo:hover {
   text-align: center;
   font-size: 12.5px;
   color: var(--faint);
+}
+
+/* ============ color tones ============ */
+
+.tone--purple {
+  color: var(--purple) !important;
+  background: rgba(167, 139, 250, 0.1) !important;
+}
+
+.tone--green {
+  color: var(--green) !important;
+  background: rgba(74, 222, 128, 0.1) !important;
+}
+
+.tone--orange {
+  color: var(--orange) !important;
+  background: rgba(251, 146, 60, 0.1) !important;
+}
+
+.tone--pink {
+  color: var(--pink) !important;
+  background: rgba(244, 114, 182, 0.1) !important;
+}
+
+.card--purple:hover {
+  border-color: rgba(167, 139, 250, 0.4);
+}
+
+.card--green:hover {
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+.card--orange:hover {
+  border-color: rgba(251, 146, 60, 0.4);
+}
+
+.card--pink:hover {
+  border-color: rgba(244, 114, 182, 0.4);
+}
+
+.tile--purple .tile__icon {
+  color: var(--purple);
+}
+
+.tile--green .tile__icon {
+  color: var(--green);
 }
 
 /* ============ reveal & responsive ============ */
