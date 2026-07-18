@@ -67,7 +67,7 @@ body {
   align-items: center;
   gap: 8px;
   padding: 10px 20px;
-  border-radius: 999px;
+  border-radius: 10px;
   font-size: 13.5px;
   font-weight: 500;
   letter-spacing: 0.1px;
@@ -824,9 +824,9 @@ body {
 }
 
 .about__avatar {
-  width: 190px;
-  height: 190px;
-  border-radius: 40px;
+  width: 230px;
+  height: 230px;
+  border-radius: 48px;
   object-fit: cover;
   display: block;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
@@ -885,24 +885,58 @@ body {
 
 .contact-fab {
   position: fixed;
-  right: 26px;
-  bottom: 26px;
+  right: 28px;
+  bottom: 28px;
   z-index: 1000;
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  padding: 12px 18px;
+  gap: 10px;
+  padding: 15px 24px;
   border-radius: 999px;
   background: rgba(14, 17, 20, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   color: var(--text);
-  font-size: 13.5px;
+  font-size: 15px;
   font-weight: 500;
   text-decoration: none;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+  overflow: hidden;
+}
+
+.contact-fab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -90%;
+  width: 55%;
+  background: linear-gradient(
+    105deg,
+    transparent 15%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 85%
+  );
+  transform: skewX(-20deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.contact-fab:hover::before {
+  animation: fabShine 1s ease 0.25s;
+}
+
+@keyframes fabShine {
+  0% {
+    left: -90%;
+    opacity: 1;
+  }
+  100% {
+    left: 140%;
+    opacity: 1;
+  }
 }
 
 .contact-fab:hover {
@@ -912,7 +946,7 @@ body {
 }
 
 .contact-fab svg {
-  font-size: 15px;
+  font-size: 17px;
   opacity: 0.9;
 }
 
@@ -936,7 +970,7 @@ body {
   overflow: hidden;
   white-space: nowrap;
   opacity: 0;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--muted);
   transition: max-width 0.35s ease, opacity 0.3s ease, margin-left 0.35s ease;
   margin-left: 0;
