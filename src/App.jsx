@@ -47,10 +47,10 @@ const CV_TR = '/cv/SertacAkalin_CV_TR.pdf'
 const CV_EN = '/cv/SertacAkalin_CV_EN.pdf'
 
 const dockItems = [
-  { label: 'Ana Sayfa', href: '#hero', icon: LuHouse },
+  { label: 'Ana Sayfa', href: '#hakkimda', icon: LuHouse },
   { label: 'Deneyim', href: '#deneyim', icon: LuBriefcase },
   { label: 'Projeler', href: '#projeler', icon: LuFolderGit2 },
-  { label: 'Hakkımda', href: '#hakkimda', icon: LuGraduationCap },
+  { label: 'Eğitim', href: '#egitim', icon: LuGraduationCap },
   { label: 'CV', href: CV_TR, icon: LuFileText, external: true },
   { label: 'GitHub', href: GITHUB_URL, icon: LuGithub, external: true },
   { label: 'LinkedIn', href: LINKEDIN_URL, icon: LuLinkedin, external: true },
@@ -231,7 +231,7 @@ function SectionHead({ label, title, sub }) {
 }
 
 function App() {
-  const [activeSection, setActiveSection] = useState('hero')
+  const [activeSection, setActiveSection] = useState('hakkimda')
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -253,7 +253,7 @@ function App() {
     const sections = document.querySelectorAll('section[id]')
 
     const onScroll = () => {
-      let current = 'hero'
+      let current = 'hakkimda'
       sections.forEach((section) => {
         if (window.scrollY >= section.offsetTop - 300) {
           current = section.getAttribute('id') || 'hero'
@@ -274,12 +274,45 @@ function App() {
       <FloatingDock items={dockItems} activeSection={activeSection} />
 
       <main className="wrap">
-        {/* ============ HERO ============ */}
-        <section id="hero" className="hero reveal">
-          <div className="hero__left">
+        {/* ============ HAKKIMDA ============ */}
+        <section id="hakkimda" className="about-hero reveal">
+          <div className="about-hero__avatar-wrap">
+            <div className="about__avatar">SA</div>
+          </div>
+          <div className="about-hero__body">
             <p className="eyebrow mono">
               <span className="eyebrow__dot" /> YENİ FIRSATLARA AÇIĞIM
             </p>
+            <h1 className="about-hero__name">Sertaç Akalın</h1>
+            <p className="about-hero__role">Bilgisayar Mühendisi · Backend Developer</p>
+            <p className="about__text">
+              İstanbul Arel Üniversitesi Bilgisayar Mühendisliği (İngilizce) mezunuyum. Backend
+              odaklı çalışıyorum; stajlarımda kurumsal yazılım süreçlerinin, uluslararası ekiplerin
+              ve gerçek ürünlerin içinde bulundum. Öğrendiğimi projede kullanmayı, karşılığında
+              projeden yeni şeyler öğrenmeyi severim.
+            </p>
+            <div className="hero__actions">
+              <a href={CV_TR} className="btn btn--cyan" target="_blank" rel="noopener noreferrer">
+                <LuFileText /> CV — Türkçe
+              </a>
+              <a
+                href={CV_EN}
+                className="btn btn--outline-cyan"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LuFileText /> CV — English
+              </a>
+              <a href="#iletisim" className="btn btn--white">
+                İletişime Geç
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ============ HERO ============ */}
+        <section id="hero" className="hero reveal">
+          <div className="hero__left">
             <h1 className="hero__title">
               Backend Sistemleri &amp; AI Destekli Uygulamalar
             </h1>
@@ -304,22 +337,11 @@ function App() {
               )}
             </p>
             <div className="hero__actions">
-              <a href={CV_TR} className="btn btn--cyan" target="_blank" rel="noopener noreferrer">
-                <LuFileText /> CV — Türkçe
-              </a>
-              <a
-                href={CV_EN}
-                className="btn btn--outline-cyan"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <LuFileText /> CV — English
-              </a>
-              <a href="#iletisim" className="btn btn--white">
-                İletişime Geç
-              </a>
-              <a href="#projeler" className="btn btn--ghost">
+              <a href="#projeler" className="btn btn--white">
                 Projelerimi Gör <LuArrowRight />
+              </a>
+              <a href={GITHUB_URL} className="btn btn--ghost" target="_blank" rel="noopener noreferrer">
+                <LuGithub /> GitHub
               </a>
             </div>
           </div>
@@ -330,30 +352,8 @@ function App() {
           <LuArrowDown />
         </div>
 
-        {/* ============ HAKKIMDA ============ */}
-        <section id="hakkimda" className="section reveal">
-          <p className="shead__label shead__label--left mono">
-            <span className="shead__line" />
-            <span className="shead__dot" />
-            HAKKIMDA
-            <span className="shead__dot" />
-            <span className="shead__line" />
-          </p>
-          <div className="about">
-            <div className="about__left">
-              <h2 className="about__title">Bilgisayar Mühendisi</h2>
-              <p className="about__text">
-                İstanbul Arel Üniversitesi Bilgisayar Mühendisliği (İngilizce) mezunuyum. Backend
-                odaklı çalışıyorum; stajlarımda kurumsal yazılım süreçlerinin, uluslararası
-                ekiplerin ve gerçek ürünlerin içinde bulundum. Öğrendiğimi projede kullanmayı,
-                karşılığında projeden yeni şeyler öğrenmeyi severim.
-              </p>
-            </div>
-            <div className="about__right">
-              <div className="about__avatar">SA</div>
-            </div>
-          </div>
-
+        {/* ============ EĞİTİM ============ */}
+        <section id="egitim" className="section reveal">
           <div className="grid2 about__cols">
             <div>
               <h3 className="about__col-title mono">EĞİTİM</h3>
