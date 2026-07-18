@@ -216,7 +216,7 @@ body {
 }
 
 .projects-col .pcard__thumb {
-  height: 150px;
+  height: 200px;
 }
 
 .repos-row {
@@ -605,18 +605,35 @@ body {
 
 .pcard__thumb {
   position: relative;
-  height: 210px;
+  height: 200px;
   border-bottom: 1px solid var(--border);
   overflow: hidden;
+  background: rgb(7, 9, 11);
 }
 
-.pcard__thumb-img {
+.pcard__thumb-bg {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  filter: blur(24px) brightness(0.45);
+  transform: scale(1.25);
+}
+
+.pcard__thumb-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   display: block;
   transition: transform 0.4s ease;
+}
+
+.pcard__thumb-img--contain {
+  object-fit: contain;
+  padding: 10px 0;
 }
 
 .pcard:hover .pcard__thumb-img {
@@ -636,28 +653,28 @@ body {
 }
 
 .pcard__body {
-  padding: 24px 26px 26px;
+  padding: 18px 20px 20px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
 .pcard__title {
-  font-size: 17px;
+  font-size: 15.5px;
   font-weight: 700;
   line-height: 1.35;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .pcard__desc {
-  font-size: 13.5px;
+  font-size: 13px;
   color: var(--muted);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   flex-grow: 1;
 }
 
 .pcard__foot {
-  margin-top: 16px;
+  margin-top: 12px;
 }
 
 .pcard__note {

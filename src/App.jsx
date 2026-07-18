@@ -127,6 +127,7 @@ const featuredProjects = [
     thumb: '/img/palmystra-app.jpg',
     thumbIcon: '/img/palmystra-icon.jpg',
     thumbAlt: 'Palmystra uygulama ekranı',
+    fit: 'contain',
   },
   {
     name: 'Hatched Area Violation Detection',
@@ -361,7 +362,21 @@ function App() {
               return (
                 <article className="pcard" key={project.name}>
                   <div className="pcard__thumb">
-                    <img className="pcard__thumb-img" src={project.thumb} alt={project.thumbAlt} />
+                    {project.fit === 'contain' && (
+                      <img
+                        className="pcard__thumb-bg"
+                        src={project.thumb}
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    )}
+                    <img
+                      className={`pcard__thumb-img${
+                        project.fit === 'contain' ? ' pcard__thumb-img--contain' : ''
+                      }`}
+                      src={project.thumb}
+                      alt={project.thumbAlt}
+                    />
                     {project.thumbIcon && (
                       <img
                         className="pcard__thumb-appicon"
