@@ -17,10 +17,7 @@ import {
   LuServer,
   LuBrain,
   LuWorkflow,
-  LuSearchCode,
   LuCode,
-  LuRocket,
-  LuShieldCheck,
   LuScanEye,
   LuClock,
   LuSend,
@@ -36,7 +33,6 @@ import {
   SiPostman,
   SiFirebase,
   SiOpencv,
-  SiSwift,
   SiReact,
   SiLangchain,
   SiGooglecloud,
@@ -59,15 +55,6 @@ const dockItems = [
   { label: 'GitHub', href: GITHUB_URL, icon: LuGithub, external: true },
   { label: 'LinkedIn', href: LINKEDIN_URL, icon: LuLinkedin, external: true },
   { label: 'İletişim', href: '#iletisim', icon: LuMail },
-]
-
-const pipelineNodes = [
-  { icon: SiSwift, title: 'iOS App', sub: 'SwiftUI arayüz', tone: 'orange' },
-  { icon: SiFastapi, title: 'REST API', sub: 'FastAPI + JWT', tone: 'cyan' },
-  { icon: LuShieldCheck, title: 'Güvenlik', sub: 'Rate limiting', tone: 'green' },
-  { icon: SiOpencv, title: 'Görüntü İşleme', sub: 'El çizgisi tespiti', tone: 'blue' },
-  { icon: SiLangchain, title: 'RAG Pipeline', sub: 'Bilgi tabanı', tone: 'purple' },
-  { icon: SiGooglecloud, title: 'Cloud Run', sub: 'Docker deploy', tone: 'pink' },
 ]
 
 const services = [
@@ -211,27 +198,6 @@ const stackWide = {
   ],
 }
 
-const processSteps = [
-  {
-    num: '01',
-    icon: LuSearchCode,
-    title: 'Anla & Tasarla',
-    desc: 'Koda başlamadan önce problemi netleştiririm: gereksinimler, API sözleşmeleri ve veri şeması. Stajlarda öğrendiğim en net şey — mimari önce gelir.',
-  },
-  {
-    num: '02',
-    icon: LuCode,
-    title: 'Geliştir & Test Et',
-    desc: 'Katmanlı mimaride, okunabilir kod yazarım. Postman/Swagger ile test ve dokümantasyon geliştirme sürecinin parçası, sona bırakılan bir iş değil.',
-  },
-  {
-    num: '03',
-    icon: LuRocket,
-    title: 'Yayına Al & İzle',
-    desc: 'Docker ile paketleyip Cloud Run gibi ortamlara alırım. Loglama ve hata takibi projeye baştan dahil olur.',
-  },
-]
-
 const education = [
   {
     school: 'İstanbul Arel Üniversitesi',
@@ -338,6 +304,17 @@ function App() {
               )}
             </p>
             <div className="hero__actions">
+              <a href={CV_TR} className="btn btn--cyan" target="_blank" rel="noopener noreferrer">
+                <LuFileText /> CV — Türkçe
+              </a>
+              <a
+                href={CV_EN}
+                className="btn btn--outline-cyan"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LuFileText /> CV — English
+              </a>
               <a href="#iletisim" className="btn btn--white">
                 İletişime Geç
               </a>
@@ -346,32 +323,82 @@ function App() {
               </a>
             </div>
           </div>
-
-          <div className="hero__right">
-            <div className="pipeline">
-              <div className="pipeline__grid">
-                {pipelineNodes.map((node) => {
-                  const Icon = node.icon
-                  return (
-                    <div className={`pnode pnode--${node.tone}`} key={node.title}>
-                      <span className="pnode__icon">
-                        <Icon />
-                      </span>
-                      <span className="pnode__title">{node.title}</span>
-                      <span className="pnode__sub">{node.sub}</span>
-                    </div>
-                  )
-                })}
-              </div>
-              <p className="pipeline__caption mono">PALMYSTRA — AI PIPELINE</p>
-            </div>
-          </div>
         </section>
 
         <div className="scroll-hint mono reveal">
           KEŞFETMEK İÇİN KAYDIR
           <LuArrowDown />
         </div>
+
+        {/* ============ HAKKIMDA ============ */}
+        <section id="hakkimda" className="section reveal">
+          <p className="shead__label shead__label--left mono">
+            <span className="shead__line" />
+            <span className="shead__dot" />
+            HAKKIMDA
+            <span className="shead__dot" />
+            <span className="shead__line" />
+          </p>
+          <div className="about">
+            <div className="about__left">
+              <h2 className="about__title">Bilgisayar Mühendisi</h2>
+              <p className="about__text">
+                İstanbul Arel Üniversitesi Bilgisayar Mühendisliği (İngilizce) mezunuyum. Backend
+                odaklı çalışıyorum; stajlarımda kurumsal yazılım süreçlerinin, uluslararası
+                ekiplerin ve gerçek ürünlerin içinde bulundum. Öğrendiğimi projede kullanmayı,
+                karşılığında projeden yeni şeyler öğrenmeyi severim.
+              </p>
+            </div>
+            <div className="about__right">
+              <div className="about__avatar">SA</div>
+            </div>
+          </div>
+
+          <div className="grid2 about__cols">
+            <div>
+              <h3 className="about__col-title mono">EĞİTİM</h3>
+              <div className="mini__list">
+                {education.map((item) => (
+                  <div className="mini" key={item.degree}>
+                    <span className="mini__icon">
+                      <LuGraduationCap />
+                    </span>
+                    <div>
+                      <p className="mini__title">{item.school}</p>
+                      <p className="mini__desc">{item.degree}</p>
+                    </div>
+                    <span className="mini__date mono">{item.date}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="about__col-title mono">DİĞER</h3>
+              <div className="mini__list">
+                {quickFacts.map((fact) => (
+                  <div className="mini" key={fact.label}>
+                    <span className="mini__icon">
+                      <LuCircleCheck />
+                    </span>
+                    <div>
+                      <p className="mini__title">{fact.label}</p>
+                      <p className="mini__desc">{fact.value}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="about__cta">
+            <span className="about__cta-text">
+              <span className="eyebrow__dot" /> Yeni fırsatlara açığım
+            </span>
+            <a href="#iletisim" className="about__cta-link">
+              İletişime Geç <LuArrowRight />
+            </a>
+          </div>
+        </section>
 
         {/* ============ YETKİNLİKLER ============ */}
         <section id="yetkinlikler" className="section reveal">
@@ -585,114 +612,6 @@ function App() {
                   </div>
                 )
               })}
-            </div>
-          </div>
-        </section>
-
-        {/* ============ SÜREÇ ============ */}
-        <section id="surec" className="section reveal">
-          <SectionHead
-            label="NASIL ÇALIŞIRIM"
-            title="Süreç"
-            sub="Her proje, kod yazmadan önce problemi anlamakla başlar."
-          />
-          <div className="grid3">
-            {processSteps.map((step) => {
-              const Icon = step.icon
-              return (
-                <article className="step" key={step.num}>
-                  <span className="step__num mono">{step.num}</span>
-                  <span className="step__icon">
-                    <Icon />
-                  </span>
-                  <h3 className="step__title">{step.title}</h3>
-                  <p className="step__desc">{step.desc}</p>
-                </article>
-              )
-            })}
-          </div>
-        </section>
-
-        {/* ============ HAKKIMDA ============ */}
-        <section id="hakkimda" className="section reveal">
-          <p className="shead__label shead__label--left mono">
-            <span className="shead__line" />
-            <span className="shead__dot" />
-            HAKKIMDA
-            <span className="shead__dot" />
-            <span className="shead__line" />
-          </p>
-          <div className="about">
-            <div className="about__left">
-              <h2 className="about__title">Bilgisayar Mühendisi</h2>
-              <p className="about__text">
-                İstanbul Arel Üniversitesi Bilgisayar Mühendisliği (İngilizce) mezunuyum. Backend
-                odaklı çalışıyorum; stajlarımda kurumsal yazılım süreçlerinin, uluslararası
-                ekiplerin ve gerçek ürünlerin içinde bulundum. Öğrendiğimi projede kullanmayı,
-                karşılığında projeden yeni şeyler öğrenmeyi severim.
-              </p>
-              <div className="about__stats">
-                <div className="stat">
-                  <span className="stat__num">2</span>
-                  <span className="stat__label">Staj Deneyimi</span>
-                </div>
-                <div className="stat">
-                  <span className="stat__num">6 ay</span>
-                  <span className="stat__label">FEV Türkiye</span>
-                </div>
-                <div className="stat">
-                  <span className="stat__num">5+</span>
-                  <span className="stat__label">Tamamlanan Proje</span>
-                </div>
-              </div>
-            </div>
-            <div className="about__right">
-              <div className="about__avatar">SA</div>
-            </div>
-          </div>
-
-          <div className="about__cta">
-            <span className="about__cta-text">
-              <span className="eyebrow__dot" /> Yeni fırsatlara açığım
-            </span>
-            <a href="#iletisim" className="about__cta-link">
-              İletişime Geç <LuArrowRight />
-            </a>
-          </div>
-
-          <div className="grid2 about__cols">
-            <div>
-              <h3 className="about__col-title mono">EĞİTİM</h3>
-              <div className="mini__list">
-                {education.map((item) => (
-                  <div className="mini" key={item.degree}>
-                    <span className="mini__icon">
-                      <LuGraduationCap />
-                    </span>
-                    <div>
-                      <p className="mini__title">{item.school}</p>
-                      <p className="mini__desc">{item.degree}</p>
-                    </div>
-                    <span className="mini__date mono">{item.date}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <h3 className="about__col-title mono">DİĞER</h3>
-              <div className="mini__list">
-                {quickFacts.map((fact) => (
-                  <div className="mini" key={fact.label}>
-                    <span className="mini__icon">
-                      <LuCircleCheck />
-                    </span>
-                    <div>
-                      <p className="mini__title">{fact.label}</p>
-                      <p className="mini__desc">{fact.value}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </section>
