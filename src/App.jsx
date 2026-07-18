@@ -17,7 +17,6 @@ import {
   LuWorkflow,
   LuCode,
   LuScanEye,
-  LuClock,
   LuSend,
 } from 'react-icons/lu'
 import {
@@ -34,7 +33,6 @@ import {
   SiReact,
   SiLangchain,
   SiGooglecloud,
-  SiN8N,
 } from 'react-icons/si'
 import { DiJava } from 'react-icons/di'
 
@@ -70,7 +68,6 @@ const services = [
   },
   {
     icon: LuBrain,
-    tone: 'purple',
     title: 'AI & Bilgisayarlı Görü',
     desc: 'LLM entegrasyonları ve görüntü işleme pipeline’ları — demolar değil, çalışan sistemler.',
     checks: [
@@ -83,7 +80,6 @@ const services = [
   },
   {
     icon: LuWorkflow,
-    tone: 'green',
     title: 'Deployment & Araçlar',
     desc: 'Geliştirmeden yayına kadar sürecin tamamında kullandığım araç seti.',
     checks: [
@@ -110,7 +106,6 @@ const experience = [
   },
   {
     company: 'CodeFirst',
-    tone: 'orange',
     role: 'Java Backend Developer Stajyeri',
     date: 'Ocak — Nisan 2025',
     points: [
@@ -129,9 +124,9 @@ const featuredProjects = [
     tags: ['FastAPI', 'LangChain', 'OpenCV', 'SwiftUI', 'Cloud Run'],
     link: null,
     note: 'Kapalı kaynak',
-    thumbClass: 'thumb--palmystra',
-    thumbIcon: LuScanEye,
-    thumbText: 'Palmystra',
+    thumb: '/img/palmystra-app.jpg',
+    thumbIcon: '/img/palmystra-icon.jpg',
+    thumbAlt: 'Palmystra uygulama ekranı',
   },
   {
     name: 'Hatched Area Violation Detection',
@@ -139,9 +134,9 @@ const featuredProjects = [
     tags: ['YOLOv8', 'ByteTrack', 'OpenCV', 'EasyOCR', 'Shapely'],
     link: 'https://github.com/sertacakalin/hatched-area-violation-detection',
     note: null,
-    thumbClass: 'thumb--hatched',
-    thumbIcon: LuScanEye,
-    thumbText: 'Violation Detection',
+    thumb: '/img/hatched.jpg',
+    thumbIcon: null,
+    thumbAlt: 'İstanbul trafiğinde taralı alan',
   },
 ]
 
@@ -174,14 +169,12 @@ const stackCategories = [
   },
   {
     title: 'AI & Görüntü İşleme',
-    tone: 'purple',
     desc: 'LLM entegrasyonları ve bilgisayarlı görü projelerinde kullandıklarım.',
     tiles: [
       { icon: SiLangchain, name: 'LangChain' },
       { icon: LuBrain, name: 'RAG' },
       { icon: SiOpencv, name: 'OpenCV' },
       { icon: LuScanEye, name: 'YOLOv8' },
-      { icon: SiN8N, name: 'n8n' },
     ],
   },
 ]
@@ -279,10 +272,13 @@ function App() {
         {/* ============ ÜST BLOK: HAKKIMDA (SOL) + PROJELER (SAĞ) ============ */}
         <div className="top">
           <section id="hakkimda" className="profile reveal">
-            <div className="about__avatar">SA</div>
-            <p className="eyebrow mono">
-              <span className="eyebrow__dot" /> YENİ FIRSATLARA AÇIĞIM
-            </p>
+            <img
+              className="about__avatar"
+              src="/img/profile.jpg"
+              alt="Sertaç Akalın"
+              width="150"
+              height="150"
+            />
             <h1 className="profile__name">Sertaç Akalın</h1>
             <p className="profile__role">Bilgisayar Mühendisi · Backend Developer</p>
             <p className="about__text">
@@ -291,20 +287,34 @@ function App() {
               tabanlı projeler yapıyorum. Stajlarımda kurumsal yazılım süreçlerinin ve uluslararası
               ekiplerin içinde bulundum.
             </p>
+            <div className="cv-panel">
+              <p className="cv-panel__label mono">ÖZGEÇMİŞ</p>
+              <div className="cv-panel__actions">
+                <a href={CV_TR} className="btn btn--cyan" target="_blank" rel="noopener noreferrer">
+                  <LuFileText /> CV — Türkçe
+                </a>
+                <a
+                  href={CV_EN}
+                  className="btn btn--outline-cyan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <LuFileText /> CV — English
+                </a>
+              </div>
+            </div>
+
             <div className="profile__actions">
-              <a href={CV_TR} className="btn btn--cyan" target="_blank" rel="noopener noreferrer">
-                <LuFileText /> CV — Türkçe
+              <a href="#iletisim" className="btn btn--white">
+                İletişime Geç
               </a>
               <a
-                href={CV_EN}
-                className="btn btn--outline-cyan"
+                href={GITHUB_URL}
+                className="btn btn--ghost"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <LuFileText /> CV — English
-              </a>
-              <a href="#iletisim" className="btn btn--white">
-                İletişime Geç
+                <LuGithub /> GitHub
               </a>
             </div>
 
@@ -313,8 +323,8 @@ function App() {
             </h3>
             <div className="mini__list">
               {education.map((item) => (
-                <div className="mini card--purple" key={item.degree}>
-                  <span className="mini__icon tone--purple">
+                <div className="mini" key={item.degree}>
+                  <span className="mini__icon">
                     <LuGraduationCap />
                   </span>
                   <div>
@@ -348,13 +358,18 @@ function App() {
               <h2 className="shead__title shead__title--sm">Neler Yaptım</h2>
             </div>
             {featuredProjects.map((project) => {
-              const ThumbIcon = project.thumbIcon
               return (
                 <article className="pcard" key={project.name}>
-                  <div className={`pcard__thumb ${project.thumbClass}`}>
-                    <span className="pcard__badge mono">Öne Çıkan</span>
-                    <ThumbIcon className="pcard__thumb-icon" />
-                    <span className="pcard__thumb-text">{project.thumbText}</span>
+                  <div className="pcard__thumb">
+                    <img className="pcard__thumb-img" src={project.thumb} alt={project.thumbAlt} />
+                    {project.thumbIcon && (
+                      <img
+                        className="pcard__thumb-appicon"
+                        src={project.thumbIcon}
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    )}
                   </div>
                   <div className="pcard__body">
                     <h3 className="pcard__title">{project.name}</h3>
@@ -418,12 +433,9 @@ function App() {
           />
           <div className="xp__list">
             {experience.map((job) => (
-              <article
-                className={`xp${job.tone ? ` card--${job.tone}` : ''}`}
-                key={job.company}
-              >
+              <article className="xp" key={job.company}>
                 <div className="xp__head">
-                  <span className={`xp__icon${job.tone ? ` tone--${job.tone}` : ''}`}>
+                  <span className="xp__icon">
                     <LuBriefcase />
                   </span>
                   <div className="xp__meta">
@@ -464,11 +476,8 @@ function App() {
             {services.map((service) => {
               const Icon = service.icon
               return (
-                <article
-                  className={`scard${service.tone ? ` card--${service.tone}` : ''}`}
-                  key={service.title}
-                >
-                  <span className={`scard__icon${service.tone ? ` tone--${service.tone}` : ''}`}>
+                <article className="scard" key={service.title}>
+                  <span className="scard__icon">
                     <Icon />
                   </span>
                   <h3 className="scard__title">{service.title}</h3>
@@ -510,10 +519,7 @@ function App() {
                   {cat.tiles.map((tile) => {
                     const Icon = tile.icon
                     return (
-                      <div
-                        className={`tile${cat.tone ? ` tile--${cat.tone}` : ''}`}
-                        key={tile.name}
-                      >
+                      <div className="tile" key={tile.name}>
                         <Icon className="tile__icon" />
                         <span className="tile__name">{tile.name}</span>
                       </div>
@@ -530,7 +536,7 @@ function App() {
               {stackWide.tiles.map((tile) => {
                 const Icon = tile.icon
                 return (
-                  <div className="tile tile--green" key={tile.name}>
+                  <div className="tile" key={tile.name}>
                     <Icon className="tile__icon" />
                     <span className="tile__name">{tile.name}</span>
                   </div>
@@ -576,15 +582,6 @@ function App() {
                   <p className="cinfo__value">linkedin.com/in/sertacakalin</p>
                 </div>
               </a>
-              <div className="cinfo cinfo--static">
-                <span className="cinfo__icon">
-                  <LuClock />
-                </span>
-                <div>
-                  <p className="cinfo__label mono">DÖNÜŞ SÜRESİ</p>
-                  <p className="cinfo__value">Genelde 24 saat içinde</p>
-                </div>
-              </div>
               <div className="contact__cvs">
                 <a href={CV_TR} className="btn btn--small" target="_blank" rel="noopener noreferrer">
                   <LuFileText /> CV (Türkçe)

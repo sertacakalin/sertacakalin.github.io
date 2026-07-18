@@ -9,10 +9,6 @@
   --faint: rgb(98, 108, 116);
   --accent: rgb(34, 211, 238);
   --accent-dim: rgba(34, 211, 238, 0.6);
-  --purple: rgb(167, 139, 250);
-  --green: rgb(74, 222, 128);
-  --orange: rgb(251, 146, 60);
-  --pink: rgb(244, 114, 182);
   --border: rgba(255, 255, 255, 0.08);
   --border-hover: rgba(34, 211, 238, 0.35);
   --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
@@ -338,6 +334,34 @@ body {
   50% { transform: translateY(5px); }
 }
 
+/* ============ cv panel ============ */
+
+.cv-panel {
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  background: rgba(34, 211, 238, 0.04);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+}
+
+.cv-panel__label {
+  font-size: 10.5px;
+  letter-spacing: 2.5px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.cv-panel__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cv-panel .btn {
+  padding: 10px 16px;
+  font-size: 13px;
+}
+
 /* ============ section headers ============ */
 
 .section {
@@ -581,52 +605,34 @@ body {
 
 .pcard__thumb {
   position: relative;
-  height: 190px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  height: 210px;
   border-bottom: 1px solid var(--border);
+  overflow: hidden;
 }
 
-.thumb--palmystra {
-  background:
-    radial-gradient(ellipse 80% 90% at 25% 10%, rgba(167, 139, 250, 0.28), transparent 60%),
-    radial-gradient(ellipse 80% 90% at 80% 90%, rgba(34, 211, 238, 0.22), transparent 60%),
-    rgb(12, 10, 20);
+.pcard__thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.4s ease;
 }
 
-.thumb--hatched {
-  background:
-    radial-gradient(ellipse 80% 90% at 20% 90%, rgba(251, 146, 60, 0.22), transparent 60%),
-    radial-gradient(ellipse 80% 90% at 85% 15%, rgba(34, 211, 238, 0.25), transparent 60%),
-    rgb(8, 13, 18);
+.pcard:hover .pcard__thumb-img {
+  transform: scale(1.03);
 }
 
-.pcard__badge {
+.pcard__thumb-appicon {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  font-size: 10px;
-  letter-spacing: 1px;
-  padding: 5px 11px;
-  border-radius: 999px;
-  background: rgba(34, 211, 238, 0.12);
-  border: 1px solid rgba(34, 211, 238, 0.35);
-  color: var(--accent);
-}
-
-.pcard__thumb-icon {
-  font-size: 38px;
-  color: rgba(255, 255, 255, 0.85);
-}
-
-.pcard__thumb-text {
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: rgba(255, 255, 255, 0.9);
+  left: 16px;
+  bottom: 14px;
+  width: 54px;
+  height: 54px;
+  border-radius: 13px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.55);
 }
 
 .pcard__body {
@@ -831,16 +837,10 @@ body {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgb(16, 24, 30), rgb(8, 12, 16));
+  object-fit: cover;
+  display: block;
   border: 2px solid rgba(34, 211, 238, 0.4);
-  box-shadow: 0 0 40px rgba(34, 211, 238, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 52px;
-  font-weight: 800;
-  color: var(--accent);
-  letter-spacing: 2px;
+  box-shadow: 0 0 40px rgba(34, 211, 238, 0.1);
 }
 
 .about__cta {
@@ -1138,52 +1138,6 @@ a.cinfo:hover {
   text-align: center;
   font-size: 12.5px;
   color: var(--faint);
-}
-
-/* ============ color tones ============ */
-
-.tone--purple {
-  color: var(--purple) !important;
-  background: rgba(167, 139, 250, 0.1) !important;
-}
-
-.tone--green {
-  color: var(--green) !important;
-  background: rgba(74, 222, 128, 0.1) !important;
-}
-
-.tone--orange {
-  color: var(--orange) !important;
-  background: rgba(251, 146, 60, 0.1) !important;
-}
-
-.tone--pink {
-  color: var(--pink) !important;
-  background: rgba(244, 114, 182, 0.1) !important;
-}
-
-.card--purple:hover {
-  border-color: rgba(167, 139, 250, 0.4);
-}
-
-.card--green:hover {
-  border-color: rgba(74, 222, 128, 0.4);
-}
-
-.card--orange:hover {
-  border-color: rgba(251, 146, 60, 0.4);
-}
-
-.card--pink:hover {
-  border-color: rgba(244, 114, 182, 0.4);
-}
-
-.tile--purple .tile__icon {
-  color: var(--purple);
-}
-
-.tile--green .tile__icon {
-  color: var(--green);
 }
 
 /* ============ reveal & responsive ============ */
