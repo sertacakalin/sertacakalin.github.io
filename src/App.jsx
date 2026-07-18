@@ -10,8 +10,6 @@ import {
   LuGithub,
   LuLinkedin,
   LuMail,
-  LuArrowRight,
-  LuArrowDown,
   LuArrowUpRight,
   LuCircleCheck,
   LuServer,
@@ -260,7 +258,7 @@ function App() {
       let current = 'hakkimda'
       sections.forEach((section) => {
         if (window.scrollY >= section.offsetTop - 300) {
-          current = section.getAttribute('id') || 'hero'
+          current = section.getAttribute('id') || 'hakkimda'
         }
       })
       setActiveSection(current)
@@ -278,24 +276,22 @@ function App() {
       <FloatingDock items={dockItems} activeSection={activeSection} />
 
       <main className="wrap">
-        {/* ============ HAKKIMDA ============ */}
-        <section id="hakkimda" className="about-hero reveal">
-          <div className="about-hero__avatar-wrap">
+        {/* ============ ÜST BLOK: HAKKIMDA (SOL) + PROJELER (SAĞ) ============ */}
+        <div className="top">
+          <section id="hakkimda" className="profile reveal">
             <div className="about__avatar">SA</div>
-          </div>
-          <div className="about-hero__body">
             <p className="eyebrow mono">
               <span className="eyebrow__dot" /> YENİ FIRSATLARA AÇIĞIM
             </p>
-            <h1 className="about-hero__name">Sertaç Akalın</h1>
-            <p className="about-hero__role">Bilgisayar Mühendisi · Backend Developer</p>
+            <h1 className="profile__name">Sertaç Akalın</h1>
+            <p className="profile__role">Bilgisayar Mühendisi · Backend Developer</p>
             <p className="about__text">
-              İstanbul Arel Üniversitesi Bilgisayar Mühendisliği (İngilizce) mezunuyum. Backend
-              odaklı çalışıyorum; stajlarımda kurumsal yazılım süreçlerinin, uluslararası ekiplerin
-              ve gerçek ürünlerin içinde bulundum. Öğrendiğimi projede kullanmayı, karşılığında
-              projeden yeni şeyler öğrenmeyi severim.
+              İstanbul Arel Üniversitesi Bilgisayar Mühendisliği (İngilizce) mezunuyum. Java/Spring
+              Boot ve Python/FastAPI ile backend geliştiriyorum; yanında bilgisayarlı görü ve LLM
+              tabanlı projeler yapıyorum. Stajlarımda kurumsal yazılım süreçlerinin ve uluslararası
+              ekiplerin içinde bulundum.
             </p>
-            <div className="hero__actions">
+            <div className="profile__actions">
               <a href={CV_TR} className="btn btn--cyan" target="_blank" rel="noopener noreferrer">
                 <LuFileText /> CV — Türkçe
               </a>
@@ -311,139 +307,107 @@ function App() {
                 İletişime Geç
               </a>
             </div>
-          </div>
-        </section>
 
-        {/* ============ HERO ============ */}
-        <section id="hero" className="hero reveal">
-          <div className="hero__left">
-            <h1 className="hero__title">
-              Backend Sistemleri &amp; AI Destekli Uygulamalar
-            </h1>
-            <p className="hero__line">
-              Java/Spring Boot ve Python/FastAPI ile backend geliştiriyorum.
-            </p>
-            <p className="hero__line hero__line--accent">
-              REST API'ler, veritabanı işlemleri ve servis entegrasyonları — gerçek projelerde.
-            </p>
-            <p className="hero__para">
-              Bilgisayar Mühendisliği (İngilizce) mezunuyum. FEV Türkiye ve CodeFirst'te staj
-              yaptım; yanında bilgisayarlı görü ve LLM tabanlı projeler geliştiriyorum.
-            </p>
-            <p className="hero__stack">
-              {['Java', 'Spring Boot', 'Python', 'FastAPI', 'PostgreSQL', 'LangChain'].map(
-                (tech, i) => (
-                  <span key={tech}>
-                    {i > 0 && <span className="hero__stack-dot">·</span>}
-                    {tech}
+            <h3 className="about__col-title mono" id="egitim">
+              EĞİTİM
+            </h3>
+            <div className="mini__list">
+              {education.map((item) => (
+                <div className="mini card--purple" key={item.degree}>
+                  <span className="mini__icon tone--purple">
+                    <LuGraduationCap />
                   </span>
-                ),
-              )}
+                  <div>
+                    <p className="mini__title">{item.school}</p>
+                    <p className="mini__desc">{item.degree}</p>
+                  </div>
+                  <span className="mini__date mono">{item.date}</span>
+                </div>
+              ))}
+            </div>
+
+            <p className="profile__facts mono">
+              {quickFacts.map((fact, i) => (
+                <span key={fact.label}>
+                  {i > 0 && <span className="profile__facts-dot">·</span>}
+                  {fact.label}: {fact.value.split(' — ')[0]}
+                </span>
+              ))}
             </p>
-            <div className="hero__actions">
-              <a href="#projeler" className="btn btn--white">
-                Projelerimi Gör <LuArrowRight />
-              </a>
-              <a href={GITHUB_URL} className="btn btn--ghost" target="_blank" rel="noopener noreferrer">
-                <LuGithub /> GitHub
-              </a>
+          </section>
+
+          <section id="projeler" className="projects-col reveal">
+            <div className="shead shead--inline">
+              <p className="shead__label mono">
+                <span className="shead__line" />
+                <span className="shead__dot" />
+                PORTFOLYO
+                <span className="shead__dot" />
+                <span className="shead__line" />
+              </p>
+              <h2 className="shead__title shead__title--sm">Neler Yaptım</h2>
             </div>
-          </div>
-        </section>
-
-        <div className="scroll-hint mono reveal">
-          KEŞFETMEK İÇİN KAYDIR
-          <LuArrowDown />
-        </div>
-
-        {/* ============ EĞİTİM ============ */}
-        <section id="egitim" className="section reveal">
-          <div className="grid2 about__cols">
-            <div>
-              <h3 className="about__col-title mono">EĞİTİM</h3>
-              <div className="mini__list">
-                {education.map((item) => (
-                  <div className="mini card--purple" key={item.degree}>
-                    <span className="mini__icon tone--purple">
-                      <LuGraduationCap />
-                    </span>
-                    <div>
-                      <p className="mini__title">{item.school}</p>
-                      <p className="mini__desc">{item.degree}</p>
-                    </div>
-                    <span className="mini__date mono">{item.date}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <h3 className="about__col-title mono">DİĞER</h3>
-              <div className="mini__list">
-                {quickFacts.map((fact) => (
-                  <div className="mini card--green" key={fact.label}>
-                    <span className="mini__icon tone--green">
-                      <LuCircleCheck />
-                    </span>
-                    <div>
-                      <p className="mini__title">{fact.label}</p>
-                      <p className="mini__desc">{fact.value}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="about__cta">
-            <span className="about__cta-text">
-              <span className="eyebrow__dot" /> Yeni fırsatlara açığım
-            </span>
-            <a href="#iletisim" className="about__cta-link">
-              İletişime Geç <LuArrowRight />
-            </a>
-          </div>
-        </section>
-
-        {/* ============ YETKİNLİKLER ============ */}
-        <section id="yetkinlikler" className="section reveal">
-          <SectionHead
-            label="NELER YAPIYORUM"
-            title="Yetkinlikler"
-            sub="Stajlarda ve kendi projelerimde kullandığım, üzerine gitmeye devam ettiğim alanlar."
-          />
-          <div className="grid3">
-            {services.map((service) => {
-              const Icon = service.icon
+            {featuredProjects.map((project) => {
+              const ThumbIcon = project.thumbIcon
               return (
-                <article
-                  className={`scard${service.tone ? ` card--${service.tone}` : ''}`}
-                  key={service.title}
-                >
-                  <span className={`scard__icon${service.tone ? ` tone--${service.tone}` : ''}`}>
-                    <Icon />
-                  </span>
-                  <h3 className="scard__title">{service.title}</h3>
-                  <p className="scard__desc">{service.desc}</p>
-                  <ul className="checks">
-                    {service.checks.map((check) => (
-                      <li key={check}>
-                        <LuCircleCheck className="checks__icon" />
-                        {check}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="chips">
-                    {service.chips.map((chip) => (
-                      <span className="chip" key={chip}>
-                        {chip}
-                      </span>
-                    ))}
+                <article className="pcard" key={project.name}>
+                  <div className={`pcard__thumb ${project.thumbClass}`}>
+                    <span className="pcard__badge mono">Öne Çıkan</span>
+                    <ThumbIcon className="pcard__thumb-icon" />
+                    <span className="pcard__thumb-text">{project.thumbText}</span>
+                  </div>
+                  <div className="pcard__body">
+                    <h3 className="pcard__title">{project.name}</h3>
+                    <p className="pcard__desc">{project.desc}</p>
+                    <div className="chips">
+                      {project.tags.map((tag) => (
+                        <span className="chip" key={tag}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="pcard__foot">
+                      {project.link ? (
+                        <a
+                          href={project.link}
+                          className="btn btn--small"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <LuGithub /> GitHub
+                        </a>
+                      ) : (
+                        <span className="pcard__note mono">{project.note}</span>
+                      )}
+                    </div>
                   </div>
                 </article>
               )
             })}
-          </div>
-        </section>
+
+            <div className="repos-row">
+              {otherRepos.map((repo) => (
+                <a
+                  key={repo.name}
+                  href={repo.link}
+                  className="repo-chip mono"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <LuCode /> {repo.name}
+                </a>
+              ))}
+              <a
+                href={`${GITHUB_URL}?tab=repositories`}
+                className="repo-chip repo-chip--all mono"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                tümü <LuArrowUpRight />
+              </a>
+            </div>
+          </section>
+        </div>
 
         {/* ============ DENEYİM ============ */}
         <section id="deneyim" className="section reveal">
@@ -489,101 +453,48 @@ function App() {
           </div>
         </section>
 
-        {/* ============ PROJELER ============ */}
-        <section id="projeler" className="section reveal">
+        {/* ============ YETKİNLİKLER ============ */}
+        <section id="yetkinlikler" className="section reveal">
           <SectionHead
-            label="PORTFOLYO"
-            title="Neler Yaptım"
-            sub="Gerçek problemler üzerine geliştirdiğim, uçtan uca sahiplendiğim projeler."
+            label="NELER YAPIYORUM"
+            title="Yetkinlikler"
+            sub="Stajlarda ve kendi projelerimde kullandığım, üzerine gitmeye devam ettiğim alanlar."
           />
-          <div className="grid2">
-            {featuredProjects.map((project) => {
-              const ThumbIcon = project.thumbIcon
+          <div className="grid3">
+            {services.map((service) => {
+              const Icon = service.icon
               return (
-                <article className="pcard" key={project.name}>
-                  <div className={`pcard__thumb ${project.thumbClass}`}>
-                    <span className="pcard__badge mono">Öne Çıkan</span>
-                    <ThumbIcon className="pcard__thumb-icon" />
-                    <span className="pcard__thumb-text">{project.thumbText}</span>
-                  </div>
-                  <div className="pcard__body">
-                    <h3 className="pcard__title">{project.name}</h3>
-                    <p className="pcard__desc">{project.desc}</p>
-                    <div className="chips">
-                      {project.tags.map((tag) => (
-                        <span className="chip" key={tag}>
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="pcard__foot">
-                      {project.link ? (
-                        <a
-                          href={project.link}
-                          className="btn btn--small"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <LuGithub /> GitHub
-                        </a>
-                      ) : (
-                        <span className="pcard__note mono">{project.note}</span>
-                      )}
-                    </div>
+                <article
+                  className={`scard${service.tone ? ` card--${service.tone}` : ''}`}
+                  key={service.title}
+                >
+                  <span className={`scard__icon${service.tone ? ` tone--${service.tone}` : ''}`}>
+                    <Icon />
+                  </span>
+                  <h3 className="scard__title">{service.title}</h3>
+                  <p className="scard__desc">{service.desc}</p>
+                  <ul className="checks">
+                    {service.checks.map((check) => (
+                      <li key={check}>
+                        <LuCircleCheck className="checks__icon" />
+                        {check}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="chips">
+                    {service.chips.map((chip) => (
+                      <span className="chip" key={chip}>
+                        {chip}
+                      </span>
+                    ))}
                   </div>
                 </article>
               )
             })}
           </div>
-
-          <p className="oss__label mono">DİĞER REPOLAR</p>
-          <div className="grid2">
-            {otherRepos.map((repo) => (
-              <article className="oss card--pink" key={repo.name}>
-                <span className="oss__icon tone--pink">
-                  <LuCode />
-                </span>
-                <div className="oss__body">
-                  <h3 className="oss__title">{repo.name}</h3>
-                  <p className="oss__desc">{repo.desc}</p>
-                  <div className="oss__row">
-                    <div className="chips">
-                      {repo.chips.map((chip) => (
-                        <span className="chip" key={chip}>
-                          {chip}
-                        </span>
-                      ))}
-                    </div>
-                    <a
-                      href={repo.link}
-                      className="btn btn--small"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <LuGithub /> GitHub
-                    </a>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div className="center-actions">
-            <a
-              href={`${GITHUB_URL}?tab=repositories`}
-              className="btn btn--outline-cyan"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <LuGithub /> Tümünü GitHub'da Gör <LuArrowUpRight />
-            </a>
-            <a href="#iletisim" className="btn btn--cyan">
-              İletişime Geç <LuArrowRight />
-            </a>
-          </div>
         </section>
 
-        {/* ============ STACK ============ */}
+        {/* ============ TEKNOLOJİLER ============ */}
         <section id="stack" className="section reveal">
           <SectionHead
             label="TEMEL STACK"
@@ -599,7 +510,10 @@ function App() {
                   {cat.tiles.map((tile) => {
                     const Icon = tile.icon
                     return (
-                      <div className={`tile${cat.tone ? ` tile--${cat.tone}` : ''}`} key={tile.name}>
+                      <div
+                        className={`tile${cat.tone ? ` tile--${cat.tone}` : ''}`}
+                        key={tile.name}
+                      >
                         <Icon className="tile__icon" />
                         <span className="tile__name">{tile.name}</span>
                       </div>
@@ -616,7 +530,7 @@ function App() {
               {stackWide.tiles.map((tile) => {
                 const Icon = tile.icon
                 return (
-                  <div className="tile" key={tile.name}>
+                  <div className="tile tile--green" key={tile.name}>
                     <Icon className="tile__icon" />
                     <span className="tile__name">{tile.name}</span>
                   </div>
@@ -630,7 +544,7 @@ function App() {
         <section id="iletisim" className="section reveal">
           <SectionHead
             label="İLETİŞİM"
-            title="Birlikte Çalışalım"
+            title="Benimle İletişime Geç"
             sub="Bir pozisyon, bir proje ya da sadece selam vermek için — aşağıdan ulaşabilirsin."
           />
           <div className="contact">
@@ -681,11 +595,7 @@ function App() {
               </div>
             </div>
 
-            <form
-              className="cform"
-              action={`https://formsubmit.co/${EMAIL}`}
-              method="POST"
-            >
+            <form className="cform" action={`https://formsubmit.co/${EMAIL}`} method="POST">
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_subject" value="Portfolyo iletişim formu" />
               <h3 className="cform__title">Mesaj Gönder</h3>
@@ -730,10 +640,10 @@ function App() {
           </div>
           <div className="footer__col">
             <p className="footer__col-title mono">SİTE</p>
-            <a href="#yetkinlikler">Yetkinlikler</a>
-            <a href="#deneyim">Deneyim</a>
             <a href="#projeler">Projeler</a>
-            <a href="#hakkimda">Hakkımda</a>
+            <a href="#deneyim">Deneyim</a>
+            <a href="#yetkinlikler">Yetkinlikler</a>
+            <a href="#stack">Teknolojiler</a>
           </div>
           <div className="footer__col">
             <p className="footer__col-title mono">BAĞLANTILAR</p>
