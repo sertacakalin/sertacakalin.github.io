@@ -196,24 +196,51 @@ function App() {
               </div>
             </div>
 
-            <div className="profile__actions">
-              <a href={`mailto:${EMAIL}`} className="btn btn--white">
-                <LuMail /> Contact
-              </a>
+          </section>
+
+          <section id="experience" className="projects-col reveal">
+            <div className="shead shead--inline">
+              <h2 className="shead__title shead__title--sm">Experience</h2>
+            </div>
+            <div className="xp__list">
+            {experience.map((job) => (
+              <article className="xp" key={job.company}>
+                <div className="xp__head">
+                  <span className="xp__icon">
+                    <LuBriefcase />
+                  </span>
+                  <div className="xp__meta">
+                    <h3 className="xp__role">
+                      {job.role} <span className="xp__company">· {job.company}</span>
+                    </h3>
+                    <span className="xp__date mono">{job.date}</span>
+                  </div>
+                </div>
+                <ul className="checks">
+                  {job.points.map((point) => (
+                    <li key={point}>
+                      <LuCircleCheck className="checks__icon" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+                <div className="chips">
+                  {job.chips.map((chip) => (
+                    <span className="chip" key={chip}>
+                      {chip}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
             </div>
           </section>
 
-          <section id="projects" className="projects-col reveal">
-            <div className="shead shead--inline">
-              <p className="shead__label mono">
-                <span className="shead__line" />
-                <span className="shead__dot" />
-                WORK
-                <span className="shead__dot" />
-                <span className="shead__line" />
-              </p>
-              <h2 className="shead__title shead__title--sm">Projects</h2>
-            </div>
+        </div>
+
+        <section id="projects" className="section reveal">
+          <SectionHead label="WORK" title="Projects" />
+          <div className="projects-grid">
             {featuredProjects.map((project) => {
               const hasGallery = Boolean(project.gallery?.length)
 
@@ -307,7 +334,9 @@ function App() {
               )
             })}
 
-            <div className="repos-row">
+          </div>
+
+          <div className="repos-row repos-row--center">
               {otherRepos.map((repo) => (
                 <a
                   key={repo.name}
@@ -327,51 +356,17 @@ function App() {
               >
                 all <LuArrowUpRight />
               </a>
-            </div>
-          </section>
-        </div>
-
-        {/* ============ EXPERIENCE ============ */}
-        <section id="experience" className="section reveal">
-          <SectionHead
-            label="EXPERIENCE"
-            title="Experience"
-          />
-          <div className="xp__list">
-            {experience.map((job) => (
-              <article className="xp" key={job.company}>
-                <div className="xp__head">
-                  <span className="xp__icon">
-                    <LuBriefcase />
-                  </span>
-                  <div className="xp__meta">
-                    <h3 className="xp__role">
-                      {job.role} <span className="xp__company">· {job.company}</span>
-                    </h3>
-                    <span className="xp__date mono">{job.date}</span>
-                  </div>
-                </div>
-                <ul className="checks">
-                  {job.points.map((point) => (
-                    <li key={point}>
-                      <LuCircleCheck className="checks__icon" />
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-                <div className="chips">
-                  {job.chips.map((chip) => (
-                    <span className="chip" key={chip}>
-                      {chip}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            ))}
           </div>
         </section>
 
       </main>
+
+      <a className="contact-fab" href={`mailto:${EMAIL}`}>
+        <span className="contact-fab__dot" />
+        <LuMail />
+        <span className="contact-fab__text">Contact</span>
+        <span className="contact-fab__email mono">{EMAIL}</span>
+      </a>
     </>
   )
 }
