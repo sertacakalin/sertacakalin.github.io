@@ -35,6 +35,7 @@ const focusAreas = [
 const experience = [
   {
     company: 'FEV Turkey',
+    logo: '/img/fev.jpg',
     role: 'Software Engineering Intern',
     date: 'Jan — Jun 2026',
     points: [
@@ -46,6 +47,7 @@ const experience = [
   },
   {
     company: 'CodeFirst',
+    logo: '/img/codefirst.jpg',
     role: 'Java Backend Developer Intern',
     date: 'Jan — Apr 2025',
     points: [
@@ -206,8 +208,12 @@ function App() {
             {experience.map((job) => (
               <article className="xp" key={job.company}>
                 <div className="xp__head">
-                  <span className="xp__icon">
-                    <LuBriefcase />
+                  <span className={`xp__icon${job.logo ? ' xp__icon--logo' : ''}`}>
+                    {job.logo ? (
+                      <img src={job.logo} alt={`${job.company} logo`} loading="lazy" />
+                    ) : (
+                      <LuBriefcase />
+                    )}
                   </span>
                   <div className="xp__meta">
                     <h3 className="xp__role">

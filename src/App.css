@@ -516,16 +516,30 @@ body {
 }
 
 .xp__icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.035);
   color: var(--muted);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
   font-size: 18px;
   flex-shrink: 0;
+}
+
+.xp__icon--logo {
+  background: #fff;
+}
+
+.xp__icon--logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+  display: block;
 }
 
 .xp__meta {
