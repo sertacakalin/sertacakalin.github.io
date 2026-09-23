@@ -9,39 +9,40 @@ import {
   LuArrowUpRight,
   LuCircleCheck,
   LuCode,
+  LuTrophy,
 } from 'react-icons/lu'
 
 const GITHUB_URL = 'https://github.com/sertacakalin'
 const LINKEDIN_URL = 'https://linkedin.com/in/sertacakalin'
-const EMAIL = 'sertacakalin0@gmail.com'
+const EMAIL = 'sertac@sertacakalin.com'
 const CV_TR = '/cv/SertacAkalin_CV_TR.pdf'
 const CV_EN = '/cv/SertacAkalin_CV_EN.pdf'
 
 const focusAreas = [
   {
-    title: 'Backend APIs',
-    desc: 'REST services, data models, authentication, and clean endpoint contracts.',
+    title: 'Computer Vision',
+    desc: 'Object detection, tracking, and spatial-temporal decision logic for real traffic video.',
   },
   {
-    title: 'Image Processing',
-    desc: 'Video/image pipelines, object tracking, OCR output, and validation logic.',
+    title: 'Applied Research',
+    desc: 'Dataset collection and annotation, model training, quantitative evaluation, and field testing.',
   },
   {
-    title: 'Delivery',
-    desc: 'Dockerized services, Cloud Run deployments, Git workflow, and integrations.',
+    title: 'Backend Systems',
+    desc: 'Python/FastAPI and Java/Spring Boot services, REST APIs, and cloud deployment.',
   },
 ]
 
 const experience = [
   {
-    company: 'FEV Turkey',
+    company: 'FEV Türkiye',
     logo: '/img/fev.jpg',
     role: 'Software Engineering Intern',
     date: 'Jan — Jun 2026',
     points: [
-      'Worked on backend services for an SOVD (Service-Oriented Vehicle Diagnostics) project for Jaguar Land Rover / Tata using Python and FastAPI.',
-      'Contributed to REST-based diagnostic service endpoints and backend implementation details.',
-      'Collaborated with an international engineering team across Germany and India through daily workflow and corporate development processes.',
+      'Developed Python/FastAPI backend services for SOVD (Service-Oriented Vehicle Diagnostics), an external project delivered to Jaguar Land Rover / Tata.',
+      'Designed and implemented REST-based diagnostic endpoints for vehicle-diagnostics workflows.',
+      'Worked daily with engineering teams across Germany and India in an Agile/Scrum environment.',
     ],
     chips: ['Python', 'FastAPI', 'REST', 'Git'],
   },
@@ -51,9 +52,9 @@ const experience = [
     role: 'Java Backend Developer Intern',
     date: 'Jan — Apr 2025',
     points: [
-      'Built RESTful APIs and external service integrations with Spring Boot in a layered microservice architecture.',
-      'Worked with Spring Data JPA / Hibernate, DTO structures, transaction handling, and JWT-based authentication.',
-      'Used Postman/Swagger for testing and documentation, with Git/Docker for development workflow and environment management.',
+      'Developed RESTful APIs for a Spring Boot microservice system with a layered Controller–Service–Repository architecture.',
+      'Implemented JWT-based authentication and Spring Data JPA database operations.',
+      'Used Git, Docker, and Maven for development and builds; tested and documented APIs with Postman and Swagger.',
     ],
     chips: ['Java', 'Spring Boot', 'JPA', 'PostgreSQL', 'Docker'],
   },
@@ -61,9 +62,26 @@ const experience = [
 
 const featuredProjects = [
   {
-    name: 'Palmystra — iOS App',
-    desc: 'A full-stack iOS app that creates personalized palm readings from a hand photo. The FastAPI backend handles image processing, app services, and deployment on Docker + Cloud Run.',
-    tags: ['FastAPI', 'OpenCV', 'SwiftUI', 'Cloud Run'],
+    name: 'Hatched Area Violation Detection',
+    desc: 'An end-to-end computer vision system for detecting vehicles entering hatched road areas in Istanbul traffic. I independently collected and annotated the dataset, fine-tuned YOLOv8m, and combined tracking with polygon geometry and multi-frame confirmation.',
+    details: 'Evaluated on 11 real traffic videos, with precision, recall, and F1 each reaching 0.889. Includes severity scoring, evidence logging, and license-plate recognition in a Gradio interface. Dataset and code publicly released.',
+    metrics: [
+      { value: '3,897', label: 'Source frames' },
+      { value: '9,353', label: 'Exported images' },
+      { value: '0.773', label: 'Detection mAP50' },
+    ],
+    status: 'First-author paper · IDAP 2026',
+    tags: ['YOLOv8m', 'ByteTrack', 'OpenCV', 'PaddleOCR', 'Shapely', 'Gradio'],
+    link: 'https://github.com/sertacakalin/hatched-area-violation-detection',
+    thumb: '/img/hatched.jpg',
+    thumbAlt: 'Traffic scene with a hatched road area',
+  },
+  {
+    name: 'Palmystra — AI-Powered Mobile App',
+    desc: 'A shipped full-stack iOS app combining computer vision with a LangChain-based RAG pipeline to generate personalized readings from a palm photo.',
+    details: 'Built the FastAPI backend with authentication, rate limiting, and automated tests; containerized the service with Docker and deployed it to Google Cloud Run.',
+    status: 'Shipped application',
+    tags: ['FastAPI', 'LangChain', 'RAG', 'Computer Vision', 'SwiftUI', 'Cloud Run'],
     link: null,
     note: 'Private repository',
     thumb: '/img/palmystra-app.jpg',
@@ -77,16 +95,29 @@ const featuredProjects = [
     ],
     fit: 'contain',
   },
+]
+
+const publications = [
   {
-    name: 'Hatched Area Violation Detection',
-    desc: 'A video processing system that detects hatched-area traffic violations. It combines YOLOv8, ByteTrack, OCR, and geometric region checks for vehicle tracking and plate-reading flow.',
-    tags: ['YOLOv8', 'ByteTrack', 'OpenCV', 'PaddleOCR', 'Shapely'],
-    link: 'https://github.com/sertacakalin/hatched-area-violation-detection',
-    note: null,
-    thumb: '/img/hatched.jpg',
-    thumbIcon: null,
-    thumbAlt: 'Traffic scene with a hatched road area',
+    title: 'A deployable dual-mode vision framework for adaptive intersection control and traffic analytics',
+    authors: 'M. F. Şen, H. Gümüşkaya, and S. Akalın',
+    award: 'Best Applied Research Paper',
+    status: 'Co-author',
+    ongoing: 'Journal extension in preparation with H. Gümüşkaya and M. F. Şen.',
   },
+  {
+    title: 'Computer vision-based detection of vehicles violating hatched road areas in Istanbul traffic',
+    authors: 'S. Akalın and H. Gümüşkaya',
+    status: 'First author · Accepted',
+    ongoing: 'Journal extension in preparation with H. Gümüşkaya.',
+  },
+]
+
+const skillGroups = [
+  { title: 'AI & Computer Vision', skills: ['PyTorch', 'YOLOv8', 'ByteTrack', 'OpenCV', 'Model training & evaluation'] },
+  { title: 'Data & Research', skills: ['Dataset collection & annotation', 'Roboflow', 'Quantitative evaluation', 'Real-video field testing'] },
+  { title: 'Backend & Databases', skills: ['Python', 'Java', 'FastAPI', 'Spring Boot', 'REST APIs', 'PostgreSQL', 'MySQL', 'JWT'] },
+  { title: 'Tools & Deployment', skills: ['Git', 'Docker', 'GitHub Actions', 'Google Cloud Run', 'Postman', 'Swagger'] },
 ]
 
 const otherRepos = [
@@ -142,7 +173,7 @@ function App() {
       <div className="grid-bg" aria-hidden="true" />
 
       <main className="wrap">
-        {/* ============ TOP: ABOUT (LEFT) + PROJECTS (RIGHT) ============ */}
+        {/* ============ TOP: ABOUT + EXPERIENCE ============ */}
         <div className="top">
           <section id="about" className="profile reveal">
             <img
@@ -164,12 +195,13 @@ function App() {
               </a>
             </div>
             <h1 className="profile__name">Sertaç Akalın</h1>
-            <p className="profile__role">Computer Engineer · Backend Developer</p>
+            <p className="profile__role">Computer Engineer · AI Engineer</p>
             <p className="about__text">
-              I am a Computer Engineering graduate focused on backend systems. I build Java/Spring
-              Boot and Python/FastAPI services with clear API contracts, data models, and deployment
-              paths. My strongest work sits where backend engineering meets image and video
-              processing: turning messy input into reliable application behavior.
+              I work at the intersection of computer vision, applied AI, and backend systems.
+              I build the evidence alongside the software: collecting data, running experiments,
+              measuring failure cases, and validating systems on real video. My traffic research
+              led to a first-author paper accepted at IDAP 2026, alongside hands-on backend
+              experience with Python/FastAPI and Java/Spring Boot.
             </p>
 
             <div className="focus-list">
@@ -244,6 +276,29 @@ function App() {
 
         </div>
 
+        <section id="publications" className="section reveal">
+          <SectionHead
+            label="RESEARCH"
+            title="Publications & Research"
+            sub="10th International Artificial Intelligence and Data Processing Symposium · IDAP 2026"
+          />
+          <div className="publications-list">
+            {publications.map((paper) => (
+              <article className="publication" key={paper.title}>
+                <div className="publication__meta">
+                  <span className="mono">{paper.status}</span>
+                  {paper.award && <span className="publication__award"><LuTrophy aria-hidden="true" /> {paper.award}</span>}
+                </div>
+                <h3>{paper.title}</h3>
+                <p className="publication__authors">{paper.authors}</p>
+                <p className="publication__venue">IDAP 2026 · Istanbul, Türkiye · September 5–6, 2026</p>
+                <p className="publication__ongoing">{paper.ongoing}</p>
+              </article>
+            ))}
+          </div>
+          <p className="research-note">Both journal extensions are being prepared for submission to Q1/Q2-indexed journals.</p>
+        </section>
+
         <section id="projects" className="section reveal">
           <SectionHead label="WORK" title="Projects" />
           <div className="projects-grid">
@@ -252,7 +307,7 @@ function App() {
 
               return (
                 <article
-                  className={`pcard${hasGallery ? '' : ' pcard--compact'}`}
+                  className="pcard"
                   key={project.name}
                 >
                   <div className={`pcard__thumb${hasGallery ? ' pcard__thumb--gallery' : ''}`}>
@@ -312,8 +367,20 @@ function App() {
                     )}
                   </div>
                   <div className="pcard__body">
+                    <p className="pcard__status mono">{project.status}</p>
                     <h3 className="pcard__title">{project.name}</h3>
                     <p className="pcard__desc">{project.desc}</p>
+                    {project.metrics && (
+                      <dl className="project-metrics">
+                        {project.metrics.map((metric) => (
+                          <div key={metric.label}>
+                            <dt>{metric.label}</dt>
+                            <dd>{metric.value}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    )}
+                    <p className="pcard__desc">{project.details}</p>
                     <div className="chips">
                       {project.tags.map((tag) => (
                         <span className="chip" key={tag}>
@@ -363,6 +430,35 @@ function App() {
                 all <LuArrowUpRight />
               </a>
           </div>
+        </section>
+
+        <section id="skills" className="section reveal">
+          <SectionHead label="TOOLKIT" title="Technical Skills" />
+          <div className="skills-grid">
+            {skillGroups.map((group) => (
+              <article className="skill-group" key={group.title}>
+                <h3>{group.title}</h3>
+                <div className="chips">
+                  {group.skills.map((skill) => <span className="chip" key={skill}>{skill}</span>)}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="education" className="section reveal">
+          <SectionHead label="BACKGROUND" title="Education" />
+          <div className="education-list">
+            <article>
+              <div><h3>İstanbul Arel University</h3><p>B.Sc. in Computer Engineering (English)</p></div>
+              <span className="mono">2022–2026</span>
+            </article>
+            <article>
+              <div><h3>Web Design and Coding</h3><p>Associate Degree</p></div>
+              <span className="mono">2020–2022</span>
+            </article>
+          </div>
+          <p className="research-note">Turkish (native) · English (B2) · Military service completed</p>
         </section>
 
       </main>

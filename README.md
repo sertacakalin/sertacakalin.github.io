@@ -1,16 +1,50 @@
-# React + Vite
+# Sertaç Akalın — Personal Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+My portfolio for computer vision, applied AI, research, and backend engineering.
 
-Currently, two official plugins are available:
+**Live website:** [sertacakalin.com](https://sertacakalin.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Featured work
 
-## React Compiler
+- **Publications & research:** two IDAP 2026 conference papers, including the co-authored *A deployable dual-mode vision framework for adaptive intersection control and traffic analytics*, awarded **Best Applied Research Paper**. Journal extensions are in preparation.
+- **Hatched Area Violation Detection:** my first-author IDAP 2026 research, built on a custom Istanbul traffic dataset with 3,897 source frames and 9,353 exported images. YOLOv8m achieved 0.773 mAP50; the full system achieved 0.889 precision, recall, and F1 on 11 real traffic videos.
+- **Palmystra:** a shipped iOS application combining computer vision and LangChain-based RAG, backed by FastAPI and deployed to Google Cloud Run.
+- Engineering experience at FEV Türkiye and CodeFirst, technical skills, education, and English/Turkish resumes.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the ESLint configuration
+React 19, Vite, React Icons, and CSS. The site is deployed to GitHub Pages with GitHub Actions.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Local development
+
+Use Node.js 22, matching the deployment workflow.
+
+```sh
+npm ci
+npm run dev
+```
+
+```sh
+npm run lint     # Check source code
+npm run build    # Generate the production site in dist/
+npm run preview  # Preview the production build locally
+```
+
+## Updating content
+
+- `src/App.jsx`: profile, experience, publications, projects, skills, and education.
+- `src/App.css`: layout, styling, and responsive behavior.
+- `public/cv/`: English and Turkish PDF resumes.
+- `public/img/`: profile and project images.
+- `index.html`: page title, search description, and social sharing metadata.
+- `public/CNAME`: custom domain configuration.
+
+Research metrics and publication statuses reflect the September 2026 CV. Keep the website and downloadable resumes in sync when updating them.
+
+## Deployment
+
+Pushing to `main` runs `.github/workflows/deploy.yml`, which installs dependencies, builds the site, and deploys `dist/` to GitHub Pages. The workflow can also be started manually from GitHub Actions. GitHub Pages must use **GitHub Actions** as its publishing source, with `sertacakalin.com` configured as the custom domain.
+
+## Contact
+
+[Email](mailto:sertac@sertacakalin.com) · [LinkedIn](https://linkedin.com/in/sertacakalin) · [GitHub](https://github.com/sertacakalin)
